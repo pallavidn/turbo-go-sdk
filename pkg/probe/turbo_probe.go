@@ -16,6 +16,8 @@ type TurboProbe struct {
 	RegistrationClient *ProbeRegistrationAgent
 	DiscoveryClientMap map[string]*TargetDiscoveryAgent
 
+	//DiscoveryClient *TargetDiscoveryAgent
+	//DiscoveryTarget string
 	ActionClient TurboActionExecutorClient
 }
 
@@ -70,30 +72,19 @@ type ProbeConfig struct {
 
 // ===========================================    New Probe ==========================================================
 
-func newTurboProbe(probeConf *ProbeConfig) (*TurboProbe, error) {
-	if probeConf.ProbeType == "" {
-		return nil, ErrorInvalidProbeType()
-	}
-
-	if probeConf.ProbeCategory == "" {
-		return nil, ErrorInvalidProbeCategory()
-	}
-
+func turboProbe() *TurboProbe {
 	myProbe := &TurboProbe{
-		ProbeConfiguration: probeConf,
 		DiscoveryClientMap: make(map[string]*TargetDiscoveryAgent),
 	}
 
 	// registration client defaults
 	registrationClient := NewProbeRegistrator()
-	registrationClient.discoveryMetadata.SetFullRediscoveryIntervalSeconds(probeConf.FullDiscovery)
-	registrationClient.discoveryMetadata.SetIncrementalRediscoveryIntervalSeconds(probeConf.IncrementalDiscovery)
-	registrationClient.discoveryMetadata.SetPerformanceRediscoveryIntervalSeconds(probeConf.PerformanceDiscovery)
 
 	myProbe.RegistrationClient = registrationClient
+	myProbe.RegistrationClient.IActionPolicyProvider = &DefaultActionPolicyMetadata{}
 
 	glog.V(2).Infof("[NewTurboProbe] Created TurboProbe: %s", myProbe)
-	return myProbe, nil
+	return myProbe
 }
 
 func (theProbe *TurboProbe) getDiscoveryClient(targetIdentifier string) TurboDiscoveryClient {

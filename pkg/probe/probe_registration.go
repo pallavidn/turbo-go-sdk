@@ -2,6 +2,7 @@ package probe
 
 import (
 	"github.com/golang/glog"
+	"github.com/turbonomic/turbo-go-sdk/pkg/builder"
 	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
@@ -84,7 +85,7 @@ func (dMetadata *DiscoveryMetadata) GetPerformanceRediscoveryIntervalSeconds() i
 func (dMetadata *DiscoveryMetadata) SetIncrementalRediscoveryIntervalSeconds(incrementalDiscovery int32) {
 	if incrementalDiscovery >= DEFAULT_MIN_DISCOVERY_IN_SECS {
 		dMetadata.incrementalDiscovery = incrementalDiscovery
-	} else {
+	} else if incrementalDiscovery != DISCOVERY_NOT_SUPPORTED {
 		glog.Errorf("Invalid incremental discovery interval %d", incrementalDiscovery)
 	}
 }
@@ -93,7 +94,7 @@ func (dMetadata *DiscoveryMetadata) SetIncrementalRediscoveryIntervalSeconds(inc
 func (dMetadata *DiscoveryMetadata) SetPerformanceRediscoveryIntervalSeconds(performanceDiscovery int32) {
 	if performanceDiscovery >= DEFAULT_MIN_DISCOVERY_IN_SECS {
 		dMetadata.performanceDiscovery = performanceDiscovery
-	} else {
+	} else if performanceDiscovery != DISCOVERY_NOT_SUPPORTED {
 		glog.Errorf("Invalid performance discovery interval %d", performanceDiscovery)
 	}
 }
@@ -111,6 +112,15 @@ func (dMetadata *DiscoveryMetadata) SetFullRediscoveryIntervalSeconds(fullDiscov
 // different entity types by the probe
 type IActionPolicyProvider interface {
 	GetActionPolicy() []*proto.ActionPolicyDTO
+}
+
+type DefaultActionPolicyMetadata struct {
+}
+
+func (actionMetadata *DefaultActionPolicyMetadata) GetActionPolicy() []*proto.ActionPolicyDTO {
+	actionPolicyBuilder := builder.NewActionPolicyBuilder()
+	actionPolicyBuilder.ForEntity(builder.NewEntityActionPolicyBuilder(proto.EntityDTO_UNKNOWN).RecommendOnly(proto.ActionItemDTO_NONE))
+	return actionPolicyBuilder.Create()
 }
 
 // IEntityMetadataProvider provides the metadata used to generate the unique identifier for

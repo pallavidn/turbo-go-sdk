@@ -10,6 +10,8 @@ type TestProbeDiscoveryClient struct{}
 type TestProbeRegistrationClient struct{}
 type TestProbeActionClient struct{}
 
+type TestProbeDiscoveryClientComplete struct{}
+
 func (handler *TestProbeDiscoveryClient) GetAccountValues() *TurboTargetInfo {
 	return nil
 }
@@ -18,7 +20,42 @@ func (handler *TestProbeDiscoveryClient) Validate(accountValues []*proto.Account
 }
 
 func (handler *TestProbeDiscoveryClient) Discover(accountValues []*proto.AccountValue) (*proto.DiscoveryResponse, error) {
-	return nil, fmt.Errorf("TestProbeDiscoveryClient Discover not implemented")
+	return fakeDiscoveryResponse(), nil //.Errorf("TestProbeDiscoveryClient Discover not implemented")
+}
+
+func (handler *TestProbeDiscoveryClientComplete) GetAccountValues() *TurboTargetInfo {
+	return nil
+}
+func (handler *TestProbeDiscoveryClientComplete) Validate(accountValues []*proto.AccountValue) (*proto.ValidationResponse, error) {
+	return nil, fmt.Errorf("TestProbeDiscoveryClient Validate not implemented")
+}
+func (handler *TestProbeDiscoveryClientComplete) Discover(accountValues []*proto.AccountValue) (*proto.DiscoveryResponse, error) {
+	return fakeDiscoveryResponse(), nil
+}
+
+func (handler *TestProbeDiscoveryClientComplete) DiscoverIncremental(accountValues []*proto.AccountValue) (*proto.DiscoveryResponse, error) {
+	return fakeDiscoveryResponse(), nil
+}
+
+func (handler *TestProbeDiscoveryClientComplete) DiscoverPerformance(accountValues []*proto.AccountValue) (*proto.DiscoveryResponse, error) {
+	return fakeDiscoveryResponse(), nil
+}
+
+func fakeDiscoveryResponse() *proto.DiscoveryResponse {
+	var entityDtos []*proto.EntityDTO
+	eType := proto.EntityDTO_VIRTUAL_MACHINE
+	id := "Id1"
+	dName := "Entity1"
+	entityDto := &proto.EntityDTO{
+		EntityType:  &eType,
+		Id:          &id,
+		DisplayName: &dName,
+	}
+	entityDtos = append(entityDtos, entityDto)
+	discoveryResponse := &proto.DiscoveryResponse{
+		EntityDTO: entityDtos,
+	}
+	return discoveryResponse
 }
 
 func (registrationClient *TestProbeRegistrationClient) GetSupplyChainDefinition() []*proto.TemplateDTO {
