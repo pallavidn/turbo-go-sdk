@@ -7,8 +7,7 @@ require (
 	github.com/golang/protobuf v1.3.1
 	github.com/gorilla/websocket v1.2.0
 	github.com/stretchr/testify v1.3.0
-	github.com/turbonomic/turbo-api v0.0.0-20180816193551-ed948ba97e70
-	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
+	github.com/turbonomic/turbo-api v0.0.0-20200316022338-fbd613adc0eb
 	golang.org/x/net v0.0.0-20200301022130-244492dfa37a
 )
 
