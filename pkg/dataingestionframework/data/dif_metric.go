@@ -12,7 +12,7 @@ type DIFMetricVal struct {
 	Unit        *DIFMetricUnit `json:"unit"`
 	Key         *string        `json:"key"`
 	Description *string        `json:"description"`
-	RawMetrics  interface{}   `json:"rawData"`
+	RawMetrics  interface{}    `json:"rawData"`
 }
 
 type DIFMetricUnit string
