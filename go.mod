@@ -10,5 +10,3 @@ require (
 	github.com/turbonomic/turbo-api v0.0.0-20200316022338-fbd613adc0eb
 	golang.org/x/net v0.0.0-20200301022130-244492dfa37a
 )
-
-replace github.com/turbonomic/turbo-api => ../turbo-api
