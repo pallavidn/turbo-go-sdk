@@ -101,6 +101,14 @@ func (d *DiscoveryResponseSender) chunkDiscoveryResponse(dr *proto.DiscoveryResp
 		chunks = append(chunks, chunk)
 	}
 
+	// TODO: updated with changed field name
+	if len(dr.Specs) > 0 {
+		chunk := &proto.DiscoveryResponse{
+			Specs: dr.Specs,
+		}
+		chunks = append(chunks, chunk)
+	}
+
 	// Send an empty response to signal completion of discovery
 	chunks = append(chunks, &proto.DiscoveryResponse{})
 
