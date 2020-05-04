@@ -9,4 +9,5 @@ require (
 	github.com/gorilla/websocket v1.2.0
 	github.com/stretchr/testify v1.3.0
 	github.com/turbonomic/turbo-api v0.0.0-20200413140231-3bef8fb11708
+	golang.org/x/net v0.0.0-20200501053045-e0ff5e5a1de5
 )
