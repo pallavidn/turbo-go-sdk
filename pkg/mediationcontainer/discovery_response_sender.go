@@ -101,10 +101,9 @@ func (d *DiscoveryResponseSender) chunkDiscoveryResponse(dr *proto.DiscoveryResp
 		chunks = append(chunks, chunk)
 	}
 
-	// TODO: updated with changed field name
-	if len(dr.Specs) > 0 {
+	if len(dr.ActionMergeSpecs) > 0 {
 		chunk := &proto.DiscoveryResponse{
-			Specs: dr.Specs,
+			ActionMergeSpecs: dr.ActionMergeSpecs,
 		}
 		chunks = append(chunks, chunk)
 	}
