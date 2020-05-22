@@ -11,6 +11,7 @@ type ActionMergeSpecBuilder interface {
 type MoveMergeSpecBuilder struct {
 	entityIDs    []string
 	targetID     string
+	aggregationID string
 	providerType *proto.EntityDTO_EntityType
 }
 
@@ -25,6 +26,11 @@ func (mb *MoveMergeSpecBuilder) ForEntities(entityIDs []string) *MoveMergeSpecBu
 
 func (mb *MoveMergeSpecBuilder) MergedTo(targetID string) *MoveMergeSpecBuilder {
 	mb.targetID = targetID
+	return mb
+}
+
+func (mb *MoveMergeSpecBuilder) AggregatedTo(aggregationID string) *MoveMergeSpecBuilder {
+	mb.aggregationID = aggregationID
 	return mb
 }
 
@@ -45,6 +51,7 @@ func (mb *MoveMergeSpecBuilder) Build() (*proto.ActionMergeSpec, error) {
 	mergeSpec := &proto.ActionMergeSpec{
 		EntityIds:    mb.entityIDs,
 		TargetEntity: &mb.targetID,
+		AggregationEntity: &mb.aggregationID,
 		ActionSpec: &proto.ActionMergeSpec_MoveSpec{
 			MoveSpec: &proto.MoveTransformSpec{
 				ProviderType: mb.providerType,
@@ -57,6 +64,7 @@ func (mb *MoveMergeSpecBuilder) Build() (*proto.ActionMergeSpec, error) {
 type ResizeMergeSpecBuilder struct {
 	entityIDs   []string
 	targetID    string
+	aggregationID string
 	commTypes   []proto.CommodityDTO_CommodityType
 	changedAttr []proto.ActionItemDTO_CommodityAttribute
 }
@@ -72,6 +80,12 @@ func (rb *ResizeMergeSpecBuilder) ForEntities(entityIDs []string) *ResizeMergeSp
 
 func (rb *ResizeMergeSpecBuilder) MergedTo(targetID string) *ResizeMergeSpecBuilder {
 	rb.targetID = targetID
+	return rb
+}
+
+
+func (rb *ResizeMergeSpecBuilder) AggregatedTo(aggregationID string) *ResizeMergeSpecBuilder {
+	rb.aggregationID = aggregationID
 	return rb
 }
 
@@ -97,6 +111,7 @@ func (rb *ResizeMergeSpecBuilder) Build() (*proto.ActionMergeSpec, error) {
 	mergeSpec := &proto.ActionMergeSpec{
 		EntityIds:    rb.entityIDs,
 		TargetEntity: &rb.targetID,
+		AggregationEntity: &rb.aggregationID,
 		ActionSpec: &proto.ActionMergeSpec_ResizeSpec{
 			ResizeSpec: &proto.ResizeTransformSpec{
 				CommodityType: rb.commTypes,
@@ -111,6 +126,7 @@ func (rb *ResizeMergeSpecBuilder) Build() (*proto.ActionMergeSpec, error) {
 type ProvisionMergeSpecBuilder struct {
 	entityIDs []string
 	targetID  string
+	aggregationID string
 }
 
 func NewProvisionMergeSpecBuilder() *ProvisionMergeSpecBuilder {
@@ -127,6 +143,12 @@ func (pb *ProvisionMergeSpecBuilder) MergedTo(targetID string) *ProvisionMergeSp
 	return pb
 }
 
+
+func (pb *ProvisionMergeSpecBuilder) AggregatedTo(aggregationID string) *ProvisionMergeSpecBuilder {
+	pb.aggregationID = aggregationID
+	return pb
+}
+
 func (pb *ProvisionMergeSpecBuilder) Build() (*proto.ActionMergeSpec, error) {
 	if len(pb.entityIDs) == 0 || pb.targetID == "" {
 		return nil, fmt.Errorf("Entity IDs or target ID required for action merge spec")
@@ -135,6 +157,7 @@ func (pb *ProvisionMergeSpecBuilder) Build() (*proto.ActionMergeSpec, error) {
 	mergeSpec := &proto.ActionMergeSpec{
 		EntityIds:    pb.entityIDs,
 		TargetEntity: &pb.targetID,
+		AggregationEntity: &pb.aggregationID,
 		ActionSpec: &proto.ActionMergeSpec_ProvisionSpec{
 			ProvisionSpec: &proto.ProvisionTransformSpec{},
 		},
