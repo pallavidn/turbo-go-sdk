@@ -3,7 +3,7 @@ package builder
 import (
 	"fmt"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // The actions in the Action Eligibility settings section of the EntityDTO

@@ -9,7 +9,7 @@ import (
 	"github.com/avast/retry-go"
 	"github.com/davecgh/go-spew/spew"
 	"github.com/golang/glog"
-	"github.com/turbonomic/turbo-api/pkg/api"
+	"github.ibm.com/turbonomic/turbo-api/pkg/api"
 )
 
 var (

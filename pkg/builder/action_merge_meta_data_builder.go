@@ -3,7 +3,7 @@ package builder
 import (
 	"fmt"
 	"github.com/golang/glog"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // Create action execution target when it is directly connected to the entity.

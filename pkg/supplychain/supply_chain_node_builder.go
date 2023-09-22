@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // provider creates a template entity that sells commodities to a consumer template.

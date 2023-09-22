@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 var letters = []rune("abcdefghijklmnopqrstuvwxyz0123456789")

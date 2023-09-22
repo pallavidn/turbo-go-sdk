@@ -3,10 +3,11 @@ package mediationcontainer
 import (
 	"errors"
 	"fmt"
-	"github.com/golang/glog"
-	"github.com/turbonomic/turbo-api/pkg/client"
-	"github.com/turbonomic/turbo-go-sdk/pkg/version"
 	"net/url"
+
+	"github.com/golang/glog"
+	"github.ibm.com/turbonomic/turbo-api/pkg/client"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/version"
 )
 
 var (

@@ -3,8 +3,8 @@ package group
 import (
 	"fmt"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/builder"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/builder"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 type SettingPolicybuilder struct {

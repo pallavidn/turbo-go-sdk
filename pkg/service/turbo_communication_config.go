@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/mediationcontainer"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/mediationcontainer"
 
 	"github.com/golang/glog"
 )

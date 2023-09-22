@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	protobuf "github.com/golang/protobuf/proto"
-	"github.com/turbonomic/turbo-go-sdk/pkg/builder"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/builder"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 
 	"github.com/golang/glog"
 )

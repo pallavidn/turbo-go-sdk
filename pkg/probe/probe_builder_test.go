@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/turbonomic/turbo-go-sdk/pkg"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg"
 )
 
 func TestNewProbeBuilder(t *testing.T) {

@@ -2,8 +2,9 @@ package builder
 
 import (
 	"fmt"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
 	"math"
+
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 const (

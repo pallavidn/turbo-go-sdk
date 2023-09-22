@@ -9,8 +9,8 @@ import (
 	"errors"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
-	"github.com/turbonomic/turbo-go-sdk/util/rand"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/util/rand"
 )
 
 func TestEntityDTOBuilder_NewEntityDTOBuilder(t *testing.T) {

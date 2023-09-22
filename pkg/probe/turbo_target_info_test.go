@@ -3,10 +3,11 @@ package probe
 import (
 	"testing"
 
-	"github.com/turbonomic/turbo-api/pkg/api"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
-	"github.com/turbonomic/turbo-go-sdk/util/rand"
 	"reflect"
+
+	"github.ibm.com/turbonomic/turbo-api/pkg/api"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/util/rand"
 )
 
 func TestNewTurboTargetInfoBuilder(t *testing.T) {

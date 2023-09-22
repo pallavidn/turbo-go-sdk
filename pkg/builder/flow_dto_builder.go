@@ -2,7 +2,7 @@ package builder
 
 import (
 	"errors"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 type Protocol int32

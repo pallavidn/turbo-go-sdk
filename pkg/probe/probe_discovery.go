@@ -1,6 +1,6 @@
 package probe
 
-import "github.com/turbonomic/turbo-go-sdk/pkg/proto"
+import "github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 
 // Interface for incremental discovery.
 // External probes which want to support incremental discovery should implement

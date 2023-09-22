@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/golang/glog"
-	"github.com/turbonomic/turbo-go-sdk/pkg/builder"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/builder"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 type GroupType string

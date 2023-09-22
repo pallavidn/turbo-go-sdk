@@ -1,9 +1,10 @@
 package probe
 
 import (
-	"github.com/stretchr/testify/assert"
-	"github.com/turbonomic/turbo-go-sdk/pkg"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg"
 )
 
 func TestInvalidProbeConf(t *testing.T) {

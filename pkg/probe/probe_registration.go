@@ -2,8 +2,8 @@ package probe
 
 import (
 	"github.com/golang/glog"
-	"github.com/turbonomic/turbo-go-sdk/pkg"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // ISupplyChainProvider provides the entities defined in the supply chain for a probe

@@ -2,9 +2,10 @@ package builder
 
 import (
 	"fmt"
+
 	"github.com/golang/glog"
-	"github.com/turbonomic/turbo-go-sdk/pkg"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // An AccountDefEntryBuilder builds an AccountDefEntry instance.

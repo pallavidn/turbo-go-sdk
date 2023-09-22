@@ -4,8 +4,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/probe"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/probe"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 
 	"github.com/golang/glog"
 )

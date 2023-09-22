@@ -2,11 +2,12 @@ package supplychain
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.com/stretchr/testify/assert"
+
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 func TestNewSupplyChainBuilder(t *testing.T) {

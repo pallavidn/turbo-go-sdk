@@ -1,12 +1,13 @@
 package mediationcontainer
 
 import (
-	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/version"
-	"github.com/turbonomic/turbo-go-sdk/util/rand"
+	"github.com/stretchr/testify/assert"
+
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/version"
+	"github.ibm.com/turbonomic/turbo-go-sdk/util/rand"
 )
 
 func TestValidateServerMeta(t *testing.T) {

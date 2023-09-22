@@ -3,7 +3,7 @@ package group
 import (
 	"fmt"
 	"github.com/stretchr/testify/assert"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 	"testing"
 )
 

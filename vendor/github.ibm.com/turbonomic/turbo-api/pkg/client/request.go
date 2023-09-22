@@ -11,7 +11,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/turbonomic/turbo-api/pkg/api"
+	"github.ibm.com/turbonomic/turbo-api/pkg/api"
 )
 
 type HTTPClient interface {

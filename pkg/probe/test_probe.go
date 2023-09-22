@@ -2,7 +2,8 @@ package probe
 
 import (
 	"fmt"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 type TestProbe struct{}

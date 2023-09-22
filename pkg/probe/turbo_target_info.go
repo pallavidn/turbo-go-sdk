@@ -1,8 +1,8 @@
 package probe
 
 import (
-	"github.com/turbonomic/turbo-api/pkg/api"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-api/pkg/api"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // Abstraction for the TurboTarget object in the client

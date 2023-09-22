@@ -1,7 +1,7 @@
 package mediationcontainer
 
 import (
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // ========== Builder for proto messages created from the probe =============

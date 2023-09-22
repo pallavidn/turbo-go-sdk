@@ -2,13 +2,14 @@ package service
 
 import (
 	"fmt"
-	"github.com/golang/glog"
-	"github.com/turbonomic/turbo-api/pkg/api"
-	"github.com/turbonomic/turbo-api/pkg/client"
-	"github.com/turbonomic/turbo-go-sdk/pkg/mediationcontainer"
-	"github.com/turbonomic/turbo-go-sdk/pkg/probe"
 	"net/url"
 	"time"
+
+	"github.com/golang/glog"
+	"github.ibm.com/turbonomic/turbo-api/pkg/api"
+	"github.ibm.com/turbonomic/turbo-api/pkg/client"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/mediationcontainer"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/probe"
 )
 
 // Turbonomic Automation Service that will discover the environment for the Turbo server

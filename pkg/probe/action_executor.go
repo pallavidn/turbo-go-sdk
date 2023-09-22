@@ -1,7 +1,7 @@
 package probe
 
 import (
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // Interface to perform execution of an action request for an entity in the TurboProbe.

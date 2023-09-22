@@ -1,6 +1,6 @@
 package group
 
-import "github.com/turbonomic/turbo-go-sdk/pkg/proto"
+import "github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 
 type ClusterBuilder struct {
 	*AbstractConstraintGroupBuilder

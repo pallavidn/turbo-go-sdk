@@ -1,6 +1,6 @@
 package supplychain
 
-import "github.com/turbonomic/turbo-go-sdk/pkg/proto"
+import "github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 
 const (
 	getIPAddressMethodName string = "getAddress"

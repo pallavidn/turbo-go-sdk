@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/golang/glog"
-	"github.com/turbonomic/turbo-api/pkg/api"
+	"github.ibm.com/turbonomic/turbo-api/pkg/api"
 )
 
 // APIClient connects to api service through ingress

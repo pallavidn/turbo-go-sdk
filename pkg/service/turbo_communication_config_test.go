@@ -1,9 +1,10 @@
 package service
 
 import (
-	"github.com/turbonomic/turbo-go-sdk/pkg/mediationcontainer"
-	"github.com/turbonomic/turbo-go-sdk/util/rand"
 	"testing"
+
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/mediationcontainer"
+	"github.ibm.com/turbonomic/turbo-go-sdk/util/rand"
 )
 
 func TestValidateRestAPIConfig(t *testing.T) {

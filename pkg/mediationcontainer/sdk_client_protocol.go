@@ -1,10 +1,11 @@
 package mediationcontainer
 
 import (
-	protobuf "github.com/golang/protobuf/proto"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
-	"github.com/turbonomic/turbo-go-sdk/pkg/version"
 	"os"
+
+	protobuf "github.com/golang/protobuf/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/version"
 
 	"fmt"
 	"time"

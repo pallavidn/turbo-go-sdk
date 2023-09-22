@@ -2,8 +2,9 @@ package probe
 
 import (
 	"fmt"
+
 	"github.com/golang/glog"
-	"github.com/turbonomic/turbo-go-sdk/pkg"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg"
 )
 
 // ProbeConfig hosts the configuration for Probe

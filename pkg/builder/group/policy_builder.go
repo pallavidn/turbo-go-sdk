@@ -3,7 +3,7 @@ package group
 import (
 	"fmt"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // Build the constraint for the buyer group of the policy

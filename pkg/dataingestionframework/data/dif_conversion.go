@@ -2,7 +2,7 @@ package data
 
 import (
 	set "github.com/deckarep/golang-set"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 // USING the common DIF Data

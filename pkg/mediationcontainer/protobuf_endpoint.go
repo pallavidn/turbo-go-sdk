@@ -3,8 +3,8 @@ package mediationcontainer
 import (
 	"fmt"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
-	"github.com/turbonomic/turbo-go-sdk/pkg/version"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/version"
 
 	"github.com/golang/glog"
 	goproto "github.com/golang/protobuf/proto"

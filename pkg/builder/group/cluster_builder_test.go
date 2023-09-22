@@ -2,9 +2,10 @@ package group
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 func TestClusterHasWrongEntityType(t *testing.T) {

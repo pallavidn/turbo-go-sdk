@@ -4,7 +4,7 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/probe"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/probe"
 
 	"github.com/golang/glog"
 )

@@ -1,4 +1,4 @@
-module github.com/turbonomic/turbo-go-sdk
+module github.ibm.com/turbonomic/turbo-go-sdk
 
 go 1.13
 
@@ -9,6 +9,6 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/gorilla/websocket v1.4.1
 	github.com/stretchr/testify v1.6.1
-	github.com/turbonomic/turbo-api v0.0.0-20230707140005-7608899ba463
+	github.ibm.com/turbonomic/turbo-api v0.0.0-20230919200445-2af52413d5a3
 	google.golang.org/protobuf v1.27.1
 )

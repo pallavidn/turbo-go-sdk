@@ -2,9 +2,9 @@ package builder
 
 import (
 	"github.com/stretchr/testify/assert"
-	"github.com/turbonomic/turbo-go-sdk/pkg"
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
-	"github.com/turbonomic/turbo-go-sdk/util/rand"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/util/rand"
 	"testing"
 )
 

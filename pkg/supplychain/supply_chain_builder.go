@@ -2,9 +2,10 @@ package supplychain
 
 import (
 	"fmt"
+
 	set "github.com/deckarep/golang-set"
 
-	"github.com/turbonomic/turbo-go-sdk/pkg/proto"
+	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/proto"
 )
 
 type SupplyChainBuilder struct {

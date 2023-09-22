@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/turbonomic/turbo-api/pkg/api"
+	"github.ibm.com/turbonomic/turbo-api/pkg/api"
 )
 
 func parseAPIErrorDTO(errorMessage string) (*api.APIErrorDTO, error) {
