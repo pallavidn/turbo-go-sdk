@@ -6,15 +6,15 @@ import (
 	"net/url"
 
 	"github.com/golang/glog"
-	"github.ibm.com/turbonomic/turbo-api/pkg/client"
 	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/version"
 )
 
 var (
-	defaultRemoteMediationServerEndpoints = map[string]string{
-		client.API:               "/vmturbo/remoteMediation",
-		client.TopologyProcessor: "/remoteMediation",
+	defaultRemoteMediationServerEndpoints = []WebSocketEndpoint{
+		{"client.API", "/vmturbo/remoteMediation"},
+		{"client.TopologyProcessor", "/remoteMediation"},
 	}
+
 	defaultRemoteMediationServerUser   = "vmtRemoteMediation"
 	defaultRemoteMediationServerPwd    = "vmtRemoteMediation"
 	defaultRemoteMediationLocalAddress = "http://127.0.0.1"
@@ -31,6 +31,11 @@ type ServerMeta struct {
 	Proxy        string `json:"proxy,omitempty"`
 	ClientId     string `json:"clientId,omitempty"`
 	ClientSecret string `json:"clientSecret,omitempty"`
+}
+
+type WebSocketEndpoint struct {
+	Service  string
+	Endpoint string
 }
 
 func (meta *ServerMeta) ValidateServerMeta() error {
@@ -51,7 +56,7 @@ type WebSocketConfig struct {
 	WebSocketUsername  string `json:"websocketUsername,omitempty"`
 	WebSocketPassword  string `json:"websocketPassword,omitempty"`
 	ConnectionRetry    int16  `json:"connectionRetry,omitempty"`
-	WebSocketEndpoints map[string]string
+	WebSocketEndpoints []WebSocketEndpoint
 }
 
 func (wsc *WebSocketConfig) ValidateWebSocketConfig() error {

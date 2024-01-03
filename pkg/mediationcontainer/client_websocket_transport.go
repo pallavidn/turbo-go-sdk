@@ -382,9 +382,10 @@ func openWebSocketConn(connConfig *WebSocketConnectionConfig, jwtToken string) (
 	header := getAuthHeader(connConfig.WebSocketUsername, connConfig.WebSocketPassword, jwtToken)
 
 	//3. connect it
-	for service, endpoint := range connConfig.WebSocketEndpoints {
+	for _, webSocketEndpoint := range connConfig.WebSocketEndpoints {
+		service := webSocketEndpoint.Service
 		// WebSocket URL
-		vmtServerUrl := connConfig.TurboServer + endpoint
+		vmtServerUrl := connConfig.TurboServer + webSocketEndpoint.Endpoint
 		glog.Infof("Trying websocket connection to: %s", vmtServerUrl)
 		c, _, err := d.Dial(vmtServerUrl, header)
 		if err == nil {
