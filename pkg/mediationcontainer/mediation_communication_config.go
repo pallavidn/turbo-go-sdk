@@ -6,13 +6,14 @@ import (
 	"net/url"
 
 	"github.com/golang/glog"
+	"github.ibm.com/turbonomic/turbo-api/pkg/client"
 	"github.ibm.com/turbonomic/turbo-go-sdk/pkg/version"
 )
 
 var (
 	defaultRemoteMediationServerEndpoints = []WebSocketEndpoint{
-		{"client.API", "/vmturbo/remoteMediation"},
-		{"client.TopologyProcessor", "/remoteMediation"},
+		{client.API, "/vmturbo/remoteMediation"},
+		{client.TopologyProcessor, "/remoteMediation"},
 	}
 
 	defaultRemoteMediationServerUser   = "vmtRemoteMediation"
