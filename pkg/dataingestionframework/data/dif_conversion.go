@@ -7,12 +7,18 @@ import (
 
 // USING the common DIF Data
 var DIFEntityType = map[proto.EntityDTO_EntityType]string{
-	proto.EntityDTO_VIRTUAL_MACHINE:       "virtualMachine",
-	proto.EntityDTO_APPLICATION_COMPONENT: "application",
-	proto.EntityDTO_BUSINESS_APPLICATION:  "businessApplication",
-	proto.EntityDTO_BUSINESS_TRANSACTION:  "businessTransaction",
-	proto.EntityDTO_DATABASE_SERVER:       "databaseServer",
-	proto.EntityDTO_SERVICE:               "service",
+	proto.EntityDTO_VIRTUAL_MACHINE:            "virtualMachine",
+	proto.EntityDTO_APPLICATION_COMPONENT:      "application",
+	proto.EntityDTO_BUSINESS_APPLICATION:       "businessApplication",
+	proto.EntityDTO_BUSINESS_TRANSACTION:       "businessTransaction",
+	proto.EntityDTO_DATABASE_SERVER:            "databaseServer",
+	proto.EntityDTO_SERVICE:                    "service",
+	proto.EntityDTO_CONTAINER:                  "container",
+	proto.EntityDTO_CONTAINER_POD:              "containerPod",
+	proto.EntityDTO_CONTAINER_SPEC:             "containerSpec",
+	proto.EntityDTO_WORKLOAD_CONTROLLER:        "workloadController",
+	proto.EntityDTO_NAMESPACE:                  "namespace",
+	proto.EntityDTO_CONTAINER_PLATFORM_CLUSTER: "containerPlatformCluster",
 }
 
 type DIFHostType string
@@ -34,6 +40,11 @@ var DIFMetricType = map[proto.CommodityDTO_CommodityType]string{
 	proto.CommodityDTO_DB_CACHE_HIT_RATE:     "dbCacheHitRate",
 	proto.CommodityDTO_CONNECTION:            "connection",
 	proto.CommodityDTO_KPI:                   "kpi",
+	proto.CommodityDTO_GPU:                   "gpu",
+	proto.CommodityDTO_GPU_MEM:               "gpuMem",
+	proto.CommodityDTO_GPU_REQUEST:           "gpuRequest",
+	proto.CommodityDTO_GPU_REQUEST_QUOTA:     "gpuRequestQuota",
+	proto.CommodityDTO_CLUSTER:               "cluster",
 }
 
 var validDIFEntities = []interface{}{
@@ -43,6 +54,13 @@ var validDIFEntities = []interface{}{
 	"databaseServer",
 	"service",
 	"virtualMachine",
+	"container",
+	"containerPod",
+	"containerSpec",
+	"workloadController",
+	"namespace",
+	"containerPlatformCluster",
+	"nvidiaGpu",
 }
 
 var validDIFMetrics = []interface{}{
@@ -57,6 +75,11 @@ var validDIFMetrics = []interface{}{
 	"threads",
 	"responseTime",
 	"transaction",
+	"gpu",
+	"gpuMem",
+	"gpuRequest",
+	"gpuRequestQuota",
+	"cluster",
 }
 
 var DIFEntities = set.NewSetFromSlice(validDIFEntities)

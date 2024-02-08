@@ -1,6 +1,8 @@
 package data
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type DIFMetric struct {
 	MetricMap map[string]*DIFMetricVal
@@ -65,4 +67,55 @@ func (m *DIFMetricVal) String() string {
 		s += fmt.Sprintf("Resizable:%v", *m.Resizable)
 	}
 	return s
+}
+
+// copy creates a copy of this DIFMetricVal.
+func (m *DIFMetricVal) copy() *DIFMetricVal {
+	copy := DIFMetricVal{
+		RawMetrics: m.RawMetrics,
+	}
+	if m.Average != nil {
+		average := *m.Average
+		copy.Average = &average
+	}
+	if m.Min != nil {
+		min := *m.Min
+		copy.Min = &min
+	}
+	if m.Max != nil {
+		max := *m.Max
+		copy.Max = &max
+	}
+	if m.Capacity != nil {
+		capacity := *m.Capacity
+		copy.Capacity = &capacity
+	}
+	if m.Unit != nil {
+		unit := *m.Unit
+		copy.Unit = &unit
+	}
+	if m.Key != nil {
+		key := *m.Key
+		copy.Key = &key
+	}
+	if m.Resizable != nil {
+		resizable := *m.Resizable
+		copy.Resizable = &resizable
+	}
+	if m.Description != nil {
+		description := *m.Description
+		copy.Description = &description
+	}
+	return &copy
+}
+
+// add adds the values of another DIFMetricVal to the current one.
+// Currently, we only do adding the average and the capacity.  We also assume Unit/Key/Resizable are the same.
+func (m *DIFMetricVal) add(another *DIFMetricVal) {
+	// Average
+	newAvg := *m.Average + *another.Average
+	m.Average = &newAvg
+	// Capacity
+	newCapacity := *m.Capacity + *another.Capacity
+	m.Capacity = &newCapacity
 }

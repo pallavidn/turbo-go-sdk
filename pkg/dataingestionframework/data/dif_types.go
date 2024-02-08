@@ -15,7 +15,12 @@ type DIFEntity struct {
 	MatchingIdentifiers *DIFMatchingIdentifiers    `json:"matchIdentifiers"`
 	PartOf              []*DIFPartOf               `json:"partOf"`
 	Metrics             map[string][]*DIFMetricVal `json:"metrics"`
+	Controllable        bool                       `json:"controllable"`
+	Cloneable           bool                       `json:"cloneable"`
+	Suspendable         bool                       `json:"suspendable"`
+	ProviderMustClone   bool                       `json:"providerMustClone""`
 	namespace           string
+	attributes          map[string]string
 	partOfSet           set.Set
 	hostTypeSet         set.Set
 }
@@ -52,6 +57,26 @@ func (e *DIFEntity) WithName(name string) *DIFEntity {
 	return e
 }
 
+func (e *DIFEntity) WithControllable(controllable bool) *DIFEntity {
+	e.Controllable = controllable
+	return e
+}
+
+func (e *DIFEntity) WithCloneable(cloneable bool) *DIFEntity {
+	e.Cloneable = cloneable
+	return e
+}
+
+func (e *DIFEntity) WithSuspendable(suspendable bool) *DIFEntity {
+	e.Suspendable = suspendable
+	return e
+}
+
+func (e *DIFEntity) WithProviderMustClone(providerMustClone bool) *DIFEntity {
+	e.ProviderMustClone = providerMustClone
+	return e
+}
+
 func (e *DIFEntity) WithNamespace(namespace string) *DIFEntity {
 	e.namespace = namespace
 	return e
@@ -59,6 +84,15 @@ func (e *DIFEntity) WithNamespace(namespace string) *DIFEntity {
 
 func (e *DIFEntity) GetNamespace() string {
 	return e.namespace
+}
+
+func (e *DIFEntity) WithAttributes(attrs map[string]string) *DIFEntity {
+	e.attributes = attrs
+	return e
+}
+
+func (e *DIFEntity) GetAttribute(key string) string {
+	return e.attributes[key]
 }
 
 func (e *DIFEntity) PartOfEntity(entity, id, label string) *DIFEntity {
@@ -191,6 +225,33 @@ func sameKey(key1 *string, key2 *string) bool {
 
 func (e *DIFEntity) AddMetrics(metricType string, metricVals []*DIFMetricVal) {
 	e.Metrics[metricType] = append(e.Metrics[metricType], metricVals...)
+}
+
+// PairwiseAggregate aggregates, in a pairwise-add fashion, the given metric values to this entity by the given type.
+// Ideally, we should compare the two timestamps and only add those in the same time neighborhood.
+// For simplicity, in the following, we just assume most likely the two arrays are of the same length and their
+// timestamps are the same. If the given metric val array is longer than in this entity, then a copy of its longer
+// portion will simply be appended.
+func (e *DIFEntity) PairwiseAggregate(metricType string, metricValsToAggregate []*DIFMetricVal) {
+	metricVals := e.Metrics[metricType]
+	len1 := len(metricVals)
+	len2 := len(metricValsToAggregate)
+	for i := 0; i < min(len1, len2); i++ {
+		metricVals[i].add(metricValsToAggregate[i])
+	}
+	if len1 < len2 {
+		for _, val := range metricValsToAggregate[len1:] {
+			metricVals = append(metricVals, val.copy())
+		}
+		e.Metrics[metricType] = metricVals
+	}
+}
+
+// PairwiseAggregateAll aggregates the given set of metrics, type by type, slot by slot, into this entity.
+func (e *DIFEntity) PairwiseAggregateAll(metrics map[string][]*DIFMetricVal) {
+	for t, m := range metrics {
+		e.PairwiseAggregate(t, m)
+	}
 }
 
 func (e *DIFEntity) String() string {
