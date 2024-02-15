@@ -224,6 +224,7 @@ func (eb *EntityDTOBuilder) DisplayName(displayName string) *EntityDTOBuilder {
 // remove duplicate commodities from the given commodity list
 func removeDuplicatedCommodities(commDTOs []*proto.CommodityDTO) []*proto.CommodityDTO {
 	commodityMap := make(map[string]*proto.CommodityDTO)
+	filteredCommodities := []*proto.CommodityDTO{}
 	for _, commodity := range commDTOs {
 		mapKey := "Undefined"
 		if commodity.CommodityType != nil {
@@ -232,12 +233,11 @@ func removeDuplicatedCommodities(commDTOs []*proto.CommodityDTO) []*proto.Commod
 		if commodity.Key != nil {
 			mapKey = mapKey + "_" + string(*commodity.Key)
 		}
-		commodityMap[mapKey] = commodity
-	}
-
-	filteredCommodities := []*proto.CommodityDTO{}
-	for _, commodity := range commodityMap {
-		filteredCommodities = append(filteredCommodities, commodity)
+		// preserve the order of the original list
+		if _, ok := commodityMap[mapKey]; !ok {
+			commodityMap[mapKey] = commodity
+			filteredCommodities = append(filteredCommodities, commodity)
+		}
 	}
 
 	return filteredCommodities
