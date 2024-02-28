@@ -30,7 +30,10 @@ const (
 
 var DIFMetricType = map[proto.CommodityDTO_CommodityType]string{
 	proto.CommodityDTO_RESPONSE_TIME:         "responseTime",
+	proto.CommodityDTO_SERVICE_TIME:          "serviceTime",
+	proto.CommodityDTO_QUEUING_TIME:          "queuingTime",
 	proto.CommodityDTO_TRANSACTION:           "transaction",
+	proto.CommodityDTO_CONCURRENT_QUERIES:    "concurrentQueries",
 	proto.CommodityDTO_VCPU:                  "cpu",
 	proto.CommodityDTO_VMEM:                  "memory",
 	proto.CommodityDTO_THREADS:               "threads",
@@ -60,7 +63,7 @@ var validDIFEntities = []interface{}{
 	"workloadController",
 	"namespace",
 	"containerPlatformCluster",
-	"nvidiaGpu",
+	"nvidiaGPU",
 }
 
 var validDIFMetrics = []interface{}{
@@ -74,7 +77,10 @@ var validDIFMetrics = []interface{}{
 	"memory",
 	"threads",
 	"responseTime",
+	"serviceTime",
+	"queuingTime",
 	"transaction",
+	"concurrentQueries",
 	"gpu",
 	"gpuMem",
 	"gpuRequest",

@@ -6,7 +6,7 @@ import (
 	set "github.com/deckarep/golang-set"
 )
 
-// Data ingestion framework topology entity
+// DIFEntity defines data ingestion framework topology entity
 type DIFEntity struct {
 	UID                 string                     `json:"uniqueId"`
 	Type                string                     `json:"type"`
@@ -18,7 +18,8 @@ type DIFEntity struct {
 	Controllable        bool                       `json:"controllable"`
 	Cloneable           bool                       `json:"cloneable"`
 	Suspendable         bool                       `json:"suspendable"`
-	ProviderMustClone   bool                       `json:"providerMustClone""`
+	ProviderMustClone   bool                       `json:"providerMustClone"`
+	clusterId           string
 	namespace           string
 	attributes          map[string]string
 	partOfSet           set.Set
@@ -26,7 +27,8 @@ type DIFEntity struct {
 }
 
 type DIFMatchingIdentifiers struct {
-	IPAddress string `json:"ipAddress"`
+	IPAddress                    string `json:"ipAddress"`
+	KubernetesFullyQualifiedName string `json:"kubernetesFullyQualifiedName"`
 }
 
 type DIFHostedOn struct {
@@ -75,6 +77,15 @@ func (e *DIFEntity) WithSuspendable(suspendable bool) *DIFEntity {
 func (e *DIFEntity) WithProviderMustClone(providerMustClone bool) *DIFEntity {
 	e.ProviderMustClone = providerMustClone
 	return e
+}
+
+func (e *DIFEntity) WithClusterId(clusterId string) *DIFEntity {
+	e.clusterId = clusterId
+	return e
+}
+
+func (e *DIFEntity) GetClusterId() string {
+	return e.clusterId
 }
 
 func (e *DIFEntity) WithNamespace(namespace string) *DIFEntity {
@@ -140,9 +151,15 @@ func (e *DIFEntity) HostedOnUID(uid string) *DIFEntity {
 	return e
 }
 
+// Matching creates or overwrites an existing IPAddress matcher.
+// This remains for backward compatability. Since then, multiple potential matchers have
+// been added. Instead, you should modify DIFMatchingIdentifiers directly.
+// Deprecated
 func (e *DIFEntity) Matching(id string) *DIFEntity {
 	if e.MatchingIdentifiers == nil {
-		e.MatchingIdentifiers = &DIFMatchingIdentifiers{id}
+		e.MatchingIdentifiers = &DIFMatchingIdentifiers{
+			IPAddress: id,
+		}
 		return e
 	}
 	// Overwrite
@@ -150,29 +167,26 @@ func (e *DIFEntity) Matching(id string) *DIFEntity {
 	return e
 }
 
-/*
-*
-
-	 Add a metric with certain type, kind, value and key to the DIF entity.
-	 This function makes it easier to add a metric of the same type (e.g., memory) but
-	 different kind (e.g., average, or capacity) to a DIF entity, because they can be
-	 discovered at different times.
-	 The DIFEntity.Metrics is a map where the key is the metric type, and the value is
-	 a list of DIFMetricVal. We need a list of DIFMetricVal to hold metrics with the same
-	 type but different keys, for example:
-		kpi: [
-			{
-				average: 123,
-				capacity: 1000,
-				key: "total_messages_in_queue"
-			},
-			{
-				average: 104.44444444444444,
-				capacity: 1000,
-				key: "total_waiting_time_in_queue"
-			}
-		],
-*/
+// AddMetric add a metric with certain type, kind, value and key to the DIF entity.
+//
+//	 This function makes it easier to add a metric of the same type (e.g., memory) but
+//	 different kind (e.g., average, or capacity) to a DIF entity, because they can be
+//	 discovered at different times.
+//	 The DIFEntity.Metrics is a map where the key is the metric type, and the value is
+//	 a list of DIFMetricVal. We need a list of DIFMetricVal to hold metrics with the same
+//	 type but different keys, for example:
+//		kpi: [
+//			{
+//				average: 123,
+//				capacity: 1000,
+//				key: "total_messages_in_queue"
+//			},
+//			{
+//				average: 104.44444444444444,
+//				capacity: 1000,
+//				key: "total_waiting_time_in_queue"
+//			}
+//		],
 func (e *DIFEntity) AddMetric(metricType string, kind DIFMetricValKind, value float64, key string) {
 	var metricVal *DIFMetricVal
 	var metricKey *string
@@ -227,7 +241,7 @@ func (e *DIFEntity) AddMetrics(metricType string, metricVals []*DIFMetricVal) {
 	e.Metrics[metricType] = append(e.Metrics[metricType], metricVals...)
 }
 
-// PairwiseAggregate aggregates, in a pairwise-add fashion, the given metric values to this entity by the given type.
+// PairwiseAggregate aggregates, in a pairwise-sum fashion, the given metric values to this entity by the given type.
 // Ideally, we should compare the two timestamps and only add those in the same time neighborhood.
 // For simplicity, in the following, we just assume most likely the two arrays are of the same length and their
 // timestamps are the same. If the given metric val array is longer than in this entity, then a copy of its longer
@@ -237,11 +251,11 @@ func (e *DIFEntity) PairwiseAggregate(metricType string, metricValsToAggregate [
 	len1 := len(metricVals)
 	len2 := len(metricValsToAggregate)
 	for i := 0; i < min(len1, len2); i++ {
-		metricVals[i].add(metricValsToAggregate[i])
+		metricVals[i].Sum(metricValsToAggregate[i])
 	}
 	if len1 < len2 {
 		for _, val := range metricValsToAggregate[len1:] {
-			metricVals = append(metricVals, val.copy())
+			metricVals = append(metricVals, val.Clone())
 		}
 		e.Metrics[metricType] = metricVals
 	}
@@ -258,6 +272,7 @@ func (e *DIFEntity) String() string {
 	s := fmt.Sprintf("%s[%s:%s]", e.Type, e.UID, e.Name)
 	if e.MatchingIdentifiers != nil {
 		s += fmt.Sprintf(" IP[%s]", e.MatchingIdentifiers.IPAddress)
+		s += fmt.Sprintf(" KubernetesFullyQualifiedName[%s]", e.MatchingIdentifiers.KubernetesFullyQualifiedName)
 	}
 	if e.PartOf != nil {
 		s += fmt.Sprintf(" PartOf")
