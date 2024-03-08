@@ -35,6 +35,7 @@ jobs:
   include:
     - stage: pull-request-build
       script:
+        - make check-upstream-dependencies
         - echo "Golang Build" && echo -e 'travis_fold:start:goLangBuild\\r'
         - make fmtcheck
         - make test

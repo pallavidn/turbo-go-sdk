@@ -14,3 +14,6 @@ fmtcheck:
 .PHONY: vet
 vet:
 	@go vet $(shell $(PACKAGES))
+
+check-upstream-dependencies:
+	./scripts/check_upstream_dependencies.sh
